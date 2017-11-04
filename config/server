@@ -1,0 +1,4 @@
+{
+  bindPort = 9090,
+  clientQueueBufferSize = 100
+}

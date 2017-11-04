@@ -1,0 +1,125 @@
+-- This file has been generated from package.yaml by hpack version 0.17.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           lattice
+version:        0.1.0.0
+category:       Web
+homepage:       https://github.com/githubuser/lattice#readme
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2017 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  hs-source-dirs:
+      lib
+  default-extensions: NoImplicitPrelude OverloadedStrings
+  build-depends:
+      base >= 4.7 && < 5
+    , protolude
+    , brick
+    , vty
+    , lens
+    , dhall
+    , async
+    , stm
+    , unordered-containers
+    , monad-control
+    , binary
+    , network
+    , conduit
+    , conduit-combinators
+    , conduit-extra
+    , network-conduit-tls
+  exposed-modules:
+      Protocol
+  default-language: Haskell2010
+
+executable lattice
+  main-is: Main.hs
+  hs-source-dirs:
+      src
+  default-extensions: NoImplicitPrelude OverloadedStrings
+  ghc-options: -threaded
+  build-depends:
+      base >= 4.7 && < 5
+    , protolude
+    , brick
+    , vty
+    , lens
+    , dhall
+    , async
+    , stm
+    , unordered-containers
+    , monad-control
+    , binary
+    , network
+    , conduit
+    , conduit-combinators
+    , conduit-extra
+    , network-conduit-tls
+    , lattice
+  default-language: Haskell2010
+
+executable server
+  main-is: Main.hs
+  hs-source-dirs:
+      server
+  default-extensions: NoImplicitPrelude OverloadedStrings
+  ghc-options: -threaded
+  build-depends:
+      base >= 4.7 && < 5
+    , protolude
+    , brick
+    , vty
+    , lens
+    , dhall
+    , async
+    , stm
+    , unordered-containers
+    , monad-control
+    , binary
+    , network
+    , conduit
+    , conduit-combinators
+    , conduit-extra
+    , network-conduit-tls
+    , lattice
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Tasty.hs
+  hs-source-dirs:
+      test
+  default-extensions: NoImplicitPrelude OverloadedStrings
+  build-depends:
+      base >= 4.7 && < 5
+    , protolude
+    , brick
+    , vty
+    , lens
+    , dhall
+    , async
+    , stm
+    , unordered-containers
+    , monad-control
+    , binary
+    , network
+    , conduit
+    , conduit-combinators
+    , conduit-extra
+    , network-conduit-tls
+    , lattice
+    , tasty
+    , tasty-discover
+    , tasty-hspec
+    , hspec
+  other-modules:
+      MainSpec
+      TestSpec
+  default-language: Haskell2010

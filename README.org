@@ -1,0 +1,7 @@
+* lattice
+** Production mechanics
+*** task "auctions" and bids
+    - produce n units at x cost
+    - time limits
+    - counter bid
+      - m units at y cost 

@@ -1,0 +1,62 @@
+name:                lattice
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/githubuser/lattice#readme
+license:             BSD3
+author:              Author name here
+maintainer:          example@example.com
+copyright:           2017 Author name here
+category:            Web
+extra-source-files:
+- README.md
+default-extensions:
+- NoImplicitPrelude
+- OverloadedStrings
+
+dependencies:
+  - base >= 4.7 && < 5
+  - protolude
+  - brick
+  - vty
+  - lens
+  - dhall
+  - async
+  - stm
+  - unordered-containers
+  - monad-control
+  - binary
+  - network
+  - conduit
+  - conduit-combinators
+  - conduit-extra
+  - network-conduit-tls
+
+library:
+  source-dirs: lib
+
+executables:
+  lattice:
+    source-dirs:      src
+    main:             Main.hs
+    ghc-options: "-threaded"
+    dependencies:
+    - lattice
+  server:
+    source-dirs: server
+    main: Main.hs
+    ghc-options: "-threaded"
+    dependencies:
+    - lattice
+
+tests:
+  spec:
+    main: Tasty.hs
+    source-dirs:
+      - test
+    dependencies:
+      - lattice
+      - tasty
+      - tasty-discover
+      - tasty-hspec
+      - hspec
