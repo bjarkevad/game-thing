@@ -1,37 +1,41 @@
 {-# LANGUAGE DeriveGeneric #-}
 module Protocol ( ClientId
-                , ServerMessage(..)
-                , Production(..)
+                , ServerProtocol(..)
+                , ClientProtocol(..)
+                , Auction(..)
                 , decodeC
                 , encodeC
                 ) where
 
-import Protolude
-import Data.Binary (Binary, encode, decodeOrFail)
-import Data.Conduit (ConduitM, await, yield, awaitForever)
+import           Data.Binary              (Binary, decodeOrFail, encode)
+import           Data.Conduit             (ConduitM, await, awaitForever, yield)
 import qualified Data.Conduit.Combinators as C
+import           Protolude
 
 type ClientId = ByteString
 
-data Production
-  = CreateAuction
-  | MakeBid
+data Auction = Auction Text
   deriving (Show, Generic)
-instance Binary Production
+instance Binary Auction
 
-data ServerMessage
+data ServerProtocol
   = Authenticate ClientId
-  | Data ByteString
-  | ProductionMessage Production
+  | AuctionCreated Auction
   | Close
   deriving (Show, Generic)
-instance Binary ServerMessage
+instance Binary ServerProtocol
 
-decodeC :: MonadIO m => ConduitM ByteString ServerMessage m ()
+data ClientProtocol
+  = CreateAuction Auction
+  | MakeBid
+  deriving (Show, Generic)
+instance Binary ClientProtocol
+
+decodeC :: (Binary a, MonadIO m) => ConduitM ByteString a m ()
 decodeC = awaitForever $ \bs ->
     case decode' $ strConv Strict bs of
       Right msg -> yield msg
-      Left err -> print err
+      Left err  -> print err
   where
     decode' :: (Binary b) => LByteString -> Either Text b
     decode' = bimap (\(_,_,e) -> strConv Strict e) (\(_,_,v) -> v) . decodeOrFail

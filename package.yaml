@@ -9,7 +9,7 @@ maintainer:          example@example.com
 copyright:           2017 Author name here
 category:            Web
 extra-source-files:
-- README.md
+- README.org
 default-extensions:
 - NoImplicitPrelude
 - OverloadedStrings
@@ -24,6 +24,8 @@ dependencies:
   - async
   - stm
   - unordered-containers
+  - vector
+  - vector-binary-instances
   - monad-control
   - binary
   - network
@@ -31,6 +33,7 @@ dependencies:
   - conduit-combinators
   - conduit-extra
   - network-conduit-tls
+  - unix
 
 library:
   source-dirs: lib
